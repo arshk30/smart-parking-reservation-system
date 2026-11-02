@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Parking Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <div class="sidebar">
+        <h2>ParkSmart</h2>
+        <p>MANAGEMENT SYSTEM</p>
+
+        <button onclick="showPage('dashboard')">Dashboard</button>
+        <button onclick="showPage('slots')">Parking Slots</button>
+        <button onclick="showPage('reservations')">Reservations</button>
+        <button onclick="showPage('entryexit')">Entry & Exit</button>
+        <button onclick="showPage('payments')">Payments</button>
+        <button onclick="showPage('audit')">Audit Logs</button>
+    </div>
+
+    <div class="main">
+
+        <header>
+            <h1 id="page-title">Dashboard Overview</h1>
+            <span>Smart Parking System</span>
+        </header>
+
+        <div id="notice"></div>
+
+        <!-- Dashboard -->
+        <section id="dashboard" class="page">
+
+            <div class="stats">
+                <div class="card">
+                    <h3>Total Slots</h3>
+                    <h2 id="total-slots">0</h2>
+                </div>
+
+                <div class="card">
+                    <h3>Available Slots</h3>
+                    <h2 id="available-slots">0</h2>
+                </div>
+
+                <div class="card">
+                    <h3>Occupied Slots</h3>
+                    <h2 id="occupied-slots">0</h2>
+                </div>
+
+                <div class="card">
+                    <h3>Active Reservations</h3>
+                    <h2 id="active-reservations">0</h2>
+                </div>
+
+                <div class="card">
+                    <h3>Total Revenue</h3>
+                    <h2>₹<span id="revenue">0</span></h2>
+                </div>
+            </div>
+
+            <div class="panel">
+                <h2>Parking Availability</h2>
+                <div id="slot-preview" class="slot-grid"></div>
+            </div>
+
+            <div class="panel">
+                <h2>Recent Reservations</h2>
+                <div class="table-wrap">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Customer</th>
+                                <th>Vehicle</th>
+                                <th>Slot</th>
+                                <th>Start Time</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="recent-reservations"></tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slots -->
+        <section id="slots" class="page">
+            <div class="panel">
+                <h2>All Parking Slots</h2>
+                <div id="all-slots" class="slot-grid"></div>
+            </div>
+        </section>
+
+        <!-- Reservations -->
+        <section id="reservations" class="page">
+
+            <div class="panel">
+                <h2>Create Reservation</h2>
+
+                <form id="booking-form">
+
+                    <label>Customer</label>
+                    <select id="user_id" required></select>
+
+                    <label>Vehicle</label>
+                    <select id="vehicle_id" required></select>
+
+                    <label>Parking Slot</label>
+                    <select id="slot_id" required></select>
+
+                    <label>Start Time</label>
+                    <input type="datetime-local" id="start_time" required>
+
+                    <label>End Time</label>
+                    <input type="datetime-local" id="end_time" required>
+
+                    <button type="submit">Book Parking Slot</button>
+
+                </form>
+            </div>
+
+            <div class="panel">
+                <h2>All Reservations</h2>
+                <div class="table-wrap">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Customer</th>
+                                <th>Vehicle</th>
+                                <th>Slot</th>
+                                <th>Start</th>
+                                <th>End</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="reservations-table"></tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Entry and Exit -->
+        <section id="entryexit" class="page">
+            <div class="panel">
+                <h2>Vehicle Entry and Exit Records</h2>
+
+                <div class="table-wrap">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Record ID</th>
+                                <th>Reservation</th>
+                                <th>Customer</th>
+                                <th>Vehicle</th>
+                                <th>Slot</th>
+                                <th>Entry</th>
+                                <th>Exit</th>
+                                <th>Hours</th>
+                                <th>Fee</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="records-table"></tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Payments -->
+        <section id="payments" class="page">
+            <div class="panel">
+                <h2>Payment Details</h2>
+
+                <div class="table-wrap">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Payment ID</th>
+                                <th>Record ID</th>
+                                <th>Vehicle</th>
+                                <th>Slot</th>
+                                <th>Amount</th>
+                                <th>Status</th>
+                                <th>Date</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="payments-table"></tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Audit Logs -->
+        <section id="audit" class="page">
+            <div class="panel">
+                <h2>Audit Logs</h2>
+
+                <div class="table-wrap">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Log ID</th>
+                                <th>Slot</th>
+                                <th>Old Status</th>
+                                <th>New Status</th>
+                                <th>Date</th>
+                                <th>Changed By</th>
+                            </tr>
+                        </thead>
+                        <tbody id="audit-table"></tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,282 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f3f5fa;
+    color: #25334a;
+}
+
+.sidebar {
+    width: 230px;
+    height: 100vh;
+    position: fixed;
+    background: #17243b;
+    color: white;
+    padding: 25px 15px;
+}
+
+.sidebar h2 {
+    margin-bottom: 5px;
+}
+
+.sidebar p {
+    font-size: 10px;
+    color: #9baac1;
+    letter-spacing: 2px;
+    margin-bottom: 35px;
+}
+
+.sidebar button {
+    display: block;
+    width: 100%;
+    padding: 14px;
+    margin: 7px 0;
+    border: none;
+    border-radius: 7px;
+    text-align: left;
+    background: transparent;
+    color: #dce5f3;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.sidebar button:hover {
+    background: #344968;
+    color: white;
+}
+
+.main {
+    margin-left: 230px;
+    padding: 30px;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+header h1 {
+    font-size: 25px;
+}
+
+header span {
+    color: #7d899c;
+}
+
+.page {
+    display: none;
+}
+
+.page.active {
+    display: block;
+}
+
+.stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.card,
+.panel {
+    background: white;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 3px 12px rgba(20, 40, 70, 0.05);
+}
+
+.card h3 {
+    color: #778398;
+    font-size: 13px;
+}
+
+.card h2 {
+    font-size: 27px;
+    color: #416fe0;
+}
+
+.panel h2 {
+    font-size: 18px;
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+
+.slot-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+    gap: 12px;
+}
+
+.slot-tile {
+    padding: 15px;
+    text-align: center;
+    border-radius: 9px;
+    background: #e4f7ee;
+    border: 1px solid #b9e8d0;
+}
+
+.slot-tile.occupied {
+    background: #fff0dc;
+    border-color: #f1d2a6;
+}
+
+.slot-tile.maintenance {
+    background: #e9edf3;
+    border-color: #d3d9e2;
+}
+
+.slot-tile strong {
+    display: block;
+    margin-top: 5px;
+}
+
+.slot-tile small {
+    display: block;
+    margin-top: 5px;
+    font-size: 10px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 650px;
+}
+
+th,
+td {
+    text-align: left;
+    padding: 12px;
+    border-bottom: 1px solid #e9edf3;
+    font-size: 12px;
+}
+
+th {
+    background: #f7f9fc;
+    color: #738096;
+}
+
+.table-wrap {
+    overflow-x: auto;
+}
+
+form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+form label {
+    font-size: 12px;
+    font-weight: bold;
+}
+
+form input,
+form select {
+    width: 100%;
+    padding: 11px;
+    border: 1px solid #dce2eb;
+    border-radius: 6px;
+    grid-column: span 2;
+}
+
+form label {
+    grid-column: span 2;
+}
+
+form button {
+    grid-column: span 2;
+}
+
+button {
+    cursor: pointer;
+}
+
+form button {
+    background: #4c7cf3;
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 7px;
+}
+
+.action-button {
+    border: none;
+    background: #e8efff;
+    color: #416fe0;
+    padding: 7px 10px;
+    border-radius: 5px;
+    margin: 2px;
+}
+
+.action-button.danger {
+    background: #ffe9e5;
+    color: #bd5144;
+}
+
+.status {
+    display: inline-block;
+    padding: 5px 8px;
+    border-radius: 15px;
+    font-size: 10px;
+    background: #e7efff;
+}
+
+.status-AVAILABLE,
+.status-PAID,
+.status-COMPLETED {
+    background: #e1f7ed;
+    color: #18835f;
+}
+
+.status-OCCUPIED,
+.status-ACTIVE {
+    background: #fff0dc;
+    color: #b87620;
+}
+
+.status-CANCELLED,
+.status-MAINTENANCE {
+    background: #edf0f4;
+    color: #667386;
+}
+
+#notice {
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 6px;
+    color: #177b5c;
+}
+
+@media(max-width: 750px) {
+    .sidebar {
+        position: relative;
+        width: 100%;
+        height: auto;
+    }
+
+    .sidebar button {
+        display: inline-block;
+        width: auto;
+        padding: 9px;
+    }
+
+    .main {
+        margin-left: 0;
+        padding: 15px;
+    }
+
+    header {
+        display: block;
+    }
+
+    form {
+        grid-template-columns: 1fr;
+    }
+}
